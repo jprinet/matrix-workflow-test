@@ -35,3 +35,5 @@ jobs:
           gitRepo: https://github.com/etiennestuder/java-ordered-properties
           tasks: build
           gradleEnterpriseUrl: https://ge.solutions-team.gradle.com
+      - run: |
+          ${{ toJSON(matrix) }}
