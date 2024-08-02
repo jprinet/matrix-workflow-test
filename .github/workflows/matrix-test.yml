@@ -37,3 +37,4 @@ jobs:
       #     gradleEnterpriseUrl: https://ge.solutions-team.gradle.com
       - run: |
           echo "${{ toJSON(matrix) }}" | md5sum
+          echo "${{ matrix }}"
