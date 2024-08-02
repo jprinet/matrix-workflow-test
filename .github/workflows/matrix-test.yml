@@ -3,37 +3,37 @@ name: Matrix Test
 on: [ workflow_dispatch ]
 
 jobs:
-  test_matrix:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        a: [ a1, a2, a3 ]
-        b: [ b1, b2, b3 ]
-    steps:
-      - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@erichaagdev/unique-receipt-artifact
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@erichaagdev/unique-receipt-artifact
-        env:
-          GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
-        with:
-          gitRepo: https://github.com/etiennestuder/java-ordered-properties
-          tasks: build
-          gradleEnterpriseUrl: https://ge.solutions-team.gradle.com
+#   test_matrix:
+#     runs-on: ubuntu-latest
+#     strategy:
+#       fail-fast: false
+#       matrix:
+#         a: [ a1, a2, a3 ]
+#         b: [ b1, b2, b3 ]
+#     steps:
+#       - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@erichaagdev/unique-receipt-artifact
+#         with:
+#           token: ${{ secrets.GITHUB_TOKEN }}
+#       - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@erichaagdev/unique-receipt-artifact
+#         env:
+#           GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
+#         with:
+#           gitRepo: https://github.com/etiennestuder/java-ordered-properties
+#           tasks: build
+#           gradleEnterpriseUrl: https://ge.solutions-team.gradle.com
 
   test_normal:
     runs-on: ubuntu-latest
     steps:
-      - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@erichaagdev/unique-receipt-artifact
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@erichaagdev/unique-receipt-artifact
-        env:
-          GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
-        with:
-          gitRepo: https://github.com/etiennestuder/java-ordered-properties
-          tasks: build
-          gradleEnterpriseUrl: https://ge.solutions-team.gradle.com
+      # - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@erichaagdev/unique-receipt-artifact
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      # - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@erichaagdev/unique-receipt-artifact
+      #   env:
+      #     GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
+      #   with:
+      #     gitRepo: https://github.com/etiennestuder/java-ordered-properties
+      #     tasks: build
+      #     gradleEnterpriseUrl: https://ge.solutions-team.gradle.com
       - run: |
-          ${{ toJSON(matrix) }}
+          echo "${{ toJSON(matrix) }}" | md5sum
