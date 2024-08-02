@@ -16,7 +16,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
       - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@erichaagdev/unique-receipt-artifact
         env:
-          DEVELOCITY_ACCESS_KEY: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
+          GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
         with:
           gitRepo: https://github.com/etiennestuder/java-ordered-properties
           tasks: build
