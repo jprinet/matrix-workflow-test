@@ -38,3 +38,8 @@ jobs:
       - run: |
           echo "${{ toJSON(matrix) }}" | md5sum
           echo "${{ matrix }}"
+          if [[ -z "${{ matrix }}" ]]; then
+            echo "Matrix is empty"
+          else
+            echo "Matrix is not empty"
+          fi
