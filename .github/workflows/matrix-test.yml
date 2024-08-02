@@ -11,10 +11,10 @@ jobs:
         a: [ a1, a2, a3 ]
         b: [ b1, b2, b3 ]
     steps:
-      - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@erichaagdev/unique-receipt-artifact
+      - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@actions-stable
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@erichaagdev/unique-receipt-artifact
+      - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@actions-stable
         env:
           GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
         with:
