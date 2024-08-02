@@ -14,4 +14,4 @@ jobs:
       - name: Test
         run: |
           echo "${{ matrix.a }} - ${{ matrix.b }}"
-          echo "${{ toJSON(matrix) }}"
+          echo "${{ toJSON(matrix) }}" | md5sum | cut -f 1 -d ' '
