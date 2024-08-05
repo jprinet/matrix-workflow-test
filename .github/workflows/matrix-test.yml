@@ -3,7 +3,7 @@ name: Matrix Test
 on: [ workflow_dispatch ]
 
 jobs:
-   test_matrix:
+   test_matrix-linux:
      runs-on: ubuntu-latest
      strategy:
        fail-fast: false
@@ -13,99 +13,36 @@ jobs:
      steps:
        - name: Dump unique ID
          run: |
-           echo "${{ github.run_id }}-${{github.run_number}}-${{ strategy.job-index || '0' }}-${{ strategy.job-total || '0' }}"
-       - name: Dump GitHub context
-         env:
-           GITHUB_CONTEXT: ${{ toJson(github) }}
-         run: echo "$GITHUB_CONTEXT"
-       - name: Dump job context
-         env:
-           JOB_CONTEXT: ${{ toJson(job) }}
-         run: echo "$JOB_CONTEXT"
-       - name: Dump steps context
-         env:
-           STEPS_CONTEXT: ${{ toJson(steps) }}
-         run: echo "$STEPS_CONTEXT"
-       - name: Dump runner context
-         env:
-           RUNNER_CONTEXT: ${{ toJson(runner) }}
-         run: echo "$RUNNER_CONTEXT"
-       - name: Dump strategy context
-         env:
-           STRATEGY_CONTEXT: ${{ toJson(strategy) }}
-         run: echo "$STRATEGY_CONTEXT"
-       - name: Dump matrix context
-         env:
-           MATRIX_CONTEXT: ${{ toJson(matrix) }}
-         run: echo "$MATRIX_CONTEXT"
-       - run: |
-           echo "${{ toJSON(matrix) }}" | md5sum
-           echo "${{ matrix }}"
-           if [[ -z "${{ matrix }}" ]]; then
-             echo "Matrix is empty"
-           else
-             echo "Matrix is not empty"
-           fi
-       - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@erichaagdev/unique-receipt-artifact
-         with:
-           token: ${{ secrets.GITHUB_TOKEN }}
-       - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@erichaagdev/unique-receipt-artifact
-         with:
-           token: ${{ secrets.GITHUB_TOKEN }}
-       - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@erichaagdev/unique-receipt-artifact
-         env:
-           GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
-         with:
-           gitRepo: https://github.com/etiennestuder/java-ordered-properties
-           tasks: build
-           gradleEnterpriseUrl: https://ge.solutions-team.gradle.com
+           echo "${{ github.run_id }}-${{github.run_number}}-${{ github.job }}-${{ strategy.job-index || '0' }}-${{ strategy.job-total || '0' }}"
+
+   test_matrix-windows:
+     runs-on: windows-latest
+     strategy:
+       fail-fast: false
+       matrix:
+         a: [ a1, a2, a3 ]
+         b: [ b1, b2, b3 ]
+     steps:
+       - name: Dump unique ID
+         run: |
+           echo "${{ github.run_id }}-${{github.run_number}}-${{ github.job }}-${{ strategy.job-index || '0' }}-${{ strategy.job-total || '0' }}"
+
+   test_matrix-macos:
+     runs-on: macos-latest
+     strategy:
+       fail-fast: false
+       matrix:
+         a: [ a1, a2, a3 ]
+         b: [ b1, b2, b3 ]
+     steps:
+       - name: Dump unique ID
+         run: |
+           echo "${{ github.run_id }}-${{github.run_number}}-${{ github.job }}-${{ strategy.job-index || '0' }}-${{ strategy.job-total || '0' }}"
 
    test_normal:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
     steps:
       - name: Dump unique ID
         run: |
-          echo "${{ github.run_id }}-${{github.run_number}}-${{ strategy.job-index || '0' }}-${{ strategy.job-total || '0' }}"
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
-      - name: Dump job context
-        env:
-          JOB_CONTEXT: ${{ toJson(job) }}
-        run: echo "$JOB_CONTEXT"
-      - name: Dump steps context
-        env:
-          STEPS_CONTEXT: ${{ toJson(steps) }}
-        run: echo "$STEPS_CONTEXT"
-      - name: Dump runner context
-        env:
-          RUNNER_CONTEXT: ${{ toJson(runner) }}
-        run: echo "$RUNNER_CONTEXT"
-      - name: Dump strategy context
-        env:
-          STRATEGY_CONTEXT: ${{ toJson(strategy) }}
-        run: echo "$STRATEGY_CONTEXT"
-      - name: Dump matrix context
-        env:
-          MATRIX_CONTEXT: ${{ toJson(matrix) }}
-        run: echo "$MATRIX_CONTEXT"
-      - run: |
-          echo "${{ toJSON(matrix) }}" | md5sum
-          echo "${{ matrix }}"
-          if [[ -z "${{ matrix }}" ]]; then
-            echo "Matrix is empty"
-          else
-            echo "Matrix is not empty"
-          fi
-      - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@erichaagdev/unique-receipt-artifact
-        with:
-           token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@erichaagdev/unique-receipt-artifact
-        env:
-           GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
-        with:
-           gitRepo: https://github.com/etiennestuder/java-ordered-properties
-           tasks: build
-           gradleEnterpriseUrl: https://ge.solutions-team.gradle.com
+          echo "${{ github.run_id }}-${{github.run_number}}-${{ github.job }}-${{ strategy.job-index || '0' }}-${{ strategy.job-total || '0' }}"
 
