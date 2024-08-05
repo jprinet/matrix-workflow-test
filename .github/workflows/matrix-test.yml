@@ -13,7 +13,7 @@ jobs:
      steps:
        - name: Dump unique ID
          run: |
-           echo "${{ github.run_id }}-${{github.run_number}}-${{ github.job }}-${{ strategy.job-index || '0' }}-${{ strategy.job-total || '0' }}"
+           echo "${{ github.run_id }}-${{github.run_number}}-${{ github.job }}-${{ strategy.job-index || '0' }}-${{ strategy.job-total || '0' }}" >> $GITHUB_STEP_SUMMARY
 
    test_matrix-windows:
      runs-on: windows-latest
@@ -25,7 +25,7 @@ jobs:
      steps:
        - name: Dump unique ID
          run: |
-           echo "${{ github.run_id }}-${{github.run_number}}-${{ github.job }}-${{ strategy.job-index || '0' }}-${{ strategy.job-total || '0' }}"
+           echo "${{ github.run_id }}-${{github.run_number}}-${{ github.job }}-${{ strategy.job-index || '0' }}-${{ strategy.job-total || '0' }}" >> $GITHUB_STEP_SUMMARY
 
    test_matrix-macos:
      runs-on: macos-latest
@@ -37,12 +37,12 @@ jobs:
      steps:
        - name: Dump unique ID
          run: |
-           echo "${{ github.run_id }}-${{github.run_number}}-${{ github.job }}-${{ strategy.job-index || '0' }}-${{ strategy.job-total || '0' }}"
+           echo "${{ github.run_id }}-${{github.run_number}}-${{ github.job }}-${{ strategy.job-index || '0' }}-${{ strategy.job-total || '0' }}" >> $GITHUB_STEP_SUMMARY
 
    test_normal:
     runs-on: windows-latest
     steps:
       - name: Dump unique ID
         run: |
-          echo "${{ github.run_id }}-${{github.run_number}}-${{ github.job }}-${{ strategy.job-index || '0' }}-${{ strategy.job-total || '0' }}"
+          echo "${{ github.run_id }}-${{github.run_number}}-${{ github.job }}-${{ strategy.job-index || '0' }}-${{ strategy.job-total || '0' }}" >> $GITHUB_STEP_SUMMARY
 
