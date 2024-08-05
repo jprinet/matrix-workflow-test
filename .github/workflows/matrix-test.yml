@@ -13,7 +13,7 @@ jobs:
      steps:
        - name: Dump unique ID
          run: |
-           echo "${{ github.run_id }}-${{github.run_number}}-${{ strategy.job-index || 'foo' }}"
+           echo "${{ github.run_id }}-${{github.run_number}}-${{ strategy.job-index || '0' }}-${{ strategy.job-total || '0' }}"
        - name: Dump GitHub context
          env:
            GITHUB_CONTEXT: ${{ toJson(github) }}
@@ -65,7 +65,7 @@ jobs:
     steps:
       - name: Dump unique ID
         run: |
-          echo "${{ github.run_id }}-${{github.run_number}}-${{ strategy.job-index || 'foo' }}"
+          echo "${{ github.run_id }}-${{github.run_number}}-${{ strategy.job-index || '0' }}-${{ strategy.job-total || '0' }}"
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
