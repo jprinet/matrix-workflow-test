@@ -37,18 +37,19 @@ jobs:
        - name: Dump unique ID
          run: |
            echo "${{ github.run_id }}-${{github.run_number}}-${{ github.job }}-${{ strategy.job-index || '0' }}-${{ strategy.job-total || '0' }}" >> $GITHUB_STEP_SUMMARY
-       - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@jprinet/fix-unique-artifact-id-violation
-         with:
-           token: ${{ secrets.GITHUB_TOKEN }}
-       - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@jprinet/fix-unique-artifact-id-violation
-         env:
-           GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
-         with:
-           gitRepo: https://github.com/etiennestuder/java-ordered-properties
-           tasks: build
-           args: "-x test"
-           gradleEnterpriseUrl: https://ge.solutions-team.gradle.com
-           gitOptions: "--depth=1 -c core.longpaths=true"
+# unsupported
+#       - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@jprinet/fix-unique-artifact-id-violation
+#         with:
+#           token: ${{ secrets.GITHUB_TOKEN }}
+#       - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@jprinet/fix-unique-artifact-id-violation
+#         env:
+#           GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
+#         with:
+#           gitRepo: https://github.com/etiennestuder/java-ordered-properties
+#           tasks: build
+#           args: "-x test"
+#           gradleEnterpriseUrl: https://ge.solutions-team.gradle.com
+#           gitOptions: "--depth=1 -c core.longpaths=true"
 
    test_matrix-macos:
      runs-on: macos-latest
@@ -74,7 +75,7 @@ jobs:
            gitOptions: "--depth=1 -c core.longpaths=true"
 
    test_normal:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Dump unique ID
         run: |
