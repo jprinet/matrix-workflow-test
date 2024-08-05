@@ -11,21 +11,17 @@ jobs:
          a: [ a1, a2, a3 ]
          b: [ b1, b2, b3 ]
      steps:
-       - name: Dump unique ID
-         run: |
-           echo "experiment-1-receipt-${{ github.job }}${{ strategy.job-total > 0 && format('-{0}', strategy.job-index) || '' }}" >> $GITHUB_STEP_SUMMARY
-
-   test_matrix-windows:
-     runs-on: windows-latest
-     strategy:
-       fail-fast: false
-       matrix:
-         a: [ a1, a2, a3 ]
-         b: [ b1, b2, b3 ]
-     steps:
-       - name: Dump unique ID
-         run: |
-           echo "experiment-1-receipt-${{ github.job }}${{ strategy.job-total > 1 && format('-{0}', strategy.job-index) || '' }}" >> $GITHUB_STEP_SUMMARY
+       - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@actions-stable
+         with:
+            token: ${{ secrets.GITHUB_TOKEN }}
+       - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@actions-stable
+         env:
+            GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
+         with:
+            gitRepo: https://github.com/etiennestuder/java-ordered-properties
+            tasks: build
+            gradleEnterpriseUrl: https://ge.solutions-team.gradle.com
+            gitOptions: "--depth=1 -c core.longpaths=true"
 
    test_matrix-macos:
      runs-on: macos-latest
@@ -35,14 +31,30 @@ jobs:
          a: [ a1, a2, a3 ]
          b: [ b1, b2, b3 ]
      steps:
-       - name: Dump unique ID
-         run: |
-           echo "experiment-1-receipt-${{ github.job }}${{ strategy.job-total > 1 && format('-{0}', strategy.job-index) || '' }}" >> $GITHUB_STEP_SUMMARY
+       - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@actions-stable
+         with:
+           token: ${{ secrets.GITHUB_TOKEN }}
+       - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@actions-stable
+         env:
+           GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
+         with:
+           gitRepo: https://github.com/etiennestuder/java-ordered-properties
+           tasks: build
+           gradleEnterpriseUrl: https://ge.solutions-team.gradle.com
+           gitOptions: "--depth=1 -c core.longpaths=true"
 
    test_normal:
     runs-on: ubuntu-latest
     steps:
-      - name: Dump unique ID
-        run: |
-          echo "experiment-1-receipt-${{ github.job }}${{ strategy.job-total > 1 && format('-{0}', strategy.job-index) || '' }}" >> $GITHUB_STEP_SUMMARY
+      - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/download@actions-stable
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: gradle/gradle-enterprise-build-validation-scripts/.github/actions/gradle/experiment-3@actions-stable
+        env:
+          GRADLE_ENTERPRISE_ACCESS_KEY: ${{ secrets.DEVELOCITY_ACCESS_KEY }}
+        with:
+          gitRepo: https://github.com/etiennestuder/java-ordered-properties
+          tasks: build
+          gradleEnterpriseUrl: https://ge.solutions-team.gradle.com
+          gitOptions: "--depth=1 -c core.longpaths=true"
 
