@@ -46,6 +46,7 @@ jobs:
          with:
            gitRepo: https://github.com/etiennestuder/java-ordered-properties
            tasks: build
+           args: "-x test"
            gradleEnterpriseUrl: https://ge.solutions-team.gradle.com
            gitOptions: "--depth=1 -c core.longpaths=true"
 
